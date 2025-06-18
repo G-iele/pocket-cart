@@ -1,18 +1,20 @@
-import { useCartContext } from "../../hooks/use-cart-context";
 import { Cart } from "../cart/cart";
 import { ProductCard } from "../product-card/product-card";
 import classes from "./product-page.module.scss";
-import { data } from "../../../data.js";
+import { useProductContext } from "../../hooks/use-product-context.js";
 
 export const ProductPage: React.FC = () => {
-  const { items } = useCartContext();
+  const { products, loading, error } = useProductContext();
+
+  if (loading) return <p>Loading products...</p>;
+  if (error) return <p>Error loading products: {error}</p>;
 
   return (
     <main className={classes.pageLayout}>
       <section className={classes.sectionLayout}>
         <h1>Desserts</h1>
         <div className={classes.cardsLayout}>
-          {data.map((product, i) => {
+          {products.map((product, i) => {
             return (
               <ProductCard
                 key={product.name + i}
@@ -25,7 +27,7 @@ export const ProductPage: React.FC = () => {
           })}
         </div>
       </section>
-      <Cart items={items} />
+      <Cart />
     </main>
   );
 };
