@@ -1,0 +1,35 @@
+@mixin shadow {
+  box-shadow: 0px 0px 8px 1px rgba(102, 102, 102, 0.05);
+}
+
+@mixin button(
+  $color,
+  $hover-color,
+  $background-color,
+  $hover-background-color,
+  $border-color,
+  $hover-border-color
+) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 10px 18px;
+  border: 1px solid $border-color;
+  border-radius: 24px;
+  background-color: $background-color;
+  color: $color;
+  font-weight: 600;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border 0.3s ease;
+
+  &:hover {
+    color: $hover-color;
+    border: 1px solid $hover-border-color;
+    background-color: $hover-background-color;
+  }
+}

@@ -1,0 +1,70 @@
+@use "./styles/index" as *;
+
+h1,
+h2,
+h3,
+button {
+  all: unset;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 24px 24px;
+  font-family: "Red Hat Text", sans-serif;
+  background-color: $color-background;
+
+  @media (min-width: $tablet) {
+    padding: 0 24px 24px;
+  }
+
+  @media (min-width: $desktop) {
+    padding: 0 110px 95px;
+  }
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 42px;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 28px;
+  color: $color-primary;
+}
+
+button {
+  cursor: pointer;
+}
+
+@mixin add-to-cart-button(
+  $color: $color-text-primary,
+  $bg: $color-surface,
+  $border-color: $color-button-border,
+  $hover-color: $color-primary-hover
+) {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border: 1px solid $border-color;
+  border-radius: 9999px;
+  background-color: $bg;
+  color: $color;
+  font-weight: 600;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+
+  &:hover {
+    color: $hover-color;
+    border: 1px solid $hover-color;
+  }
+}

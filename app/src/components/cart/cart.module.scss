@@ -1,0 +1,30 @@
+@use "../../styles/index" as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: $color-surface;
+
+  @media (min-width: $tablet) {
+    align-self: start;
+    border-radius: 12px;
+    padding: 24px 24px 50px;
+    @include shadow;
+  }
+}
+
+.image {
+  align-self: center;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-text-secondary;
+  align-self: center;
+}
+
+.mobileHidden {
+  display: none;
+}
