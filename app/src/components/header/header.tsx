@@ -1,22 +1,34 @@
 import Logo from "./logo.svg";
+import Heart from "./heart.svg";
+import Cart from "./cart.svg";
 import { useMediaQuery } from "react-responsive";
 
 import classes from "./header.module.scss";
-import { ToggleCartButton } from "../toggle-cart-button/toggle-cart-button";
-import { ToggleFavoritiesButton } from "../toggle-favorites-button/toggle-favorites-button";
 import { useCartContext } from "../../hooks/use-cart-context";
+import { Icon } from "../icon/icon";
+import { useFavoritesContext } from "../../hooks/use-favorites-context";
 
 export const Header: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 425 });
   const { openCartModal } = useCartContext();
+  const { showFavorites, setShowFavorites } = useFavoritesContext();
 
   return (
     <header className={classes.header}>
-      <Logo />
+      <a href="/">
+        <Logo />
+      </a>
 
       <div className={classes.actions}>
-        <ToggleFavoritiesButton />
-        {isMobile && <ToggleCartButton openCartModal={openCartModal} />}
+        <button onClick={() => setShowFavorites(true)}>
+          <Icon icon={<Heart />} size={"lg"} />
+        </button>
+
+        {isMobile && (
+          <button onClick={openCartModal}>
+            <Icon icon={<Cart />} size={"lg"} />
+          </button>
+        )}
       </div>
     </header>
   );

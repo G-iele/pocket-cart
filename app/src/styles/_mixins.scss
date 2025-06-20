@@ -11,13 +11,11 @@
   $hover-border-color
 ) {
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 10px;
 
-  padding: 10px 18px;
   border: 1px solid $border-color;
-  border-radius: 24px;
+  border-radius: 30px;
   background-color: $background-color;
   color: $color;
   font-weight: 600;

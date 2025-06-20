@@ -1,0 +1,32 @@
+@use "../../styles/index" as *;
+
+.transition {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.default {
+  color: $color-text-secondary;
+}
+
+.active {
+  color: $color-primary;
+}
+
+.sm {
+  width: 10px;
+  height: 10px;
+}
+
+.md {
+  width: 20px;
+  height: 20px;
+}
+
+.lg {
+  width: 30px;
+  height: 30px;
+}

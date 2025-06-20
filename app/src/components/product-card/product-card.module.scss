@@ -1,6 +1,7 @@
 @use "../../styles/index" as *;
 
 .layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -29,11 +30,12 @@
   color: $color-text-accent;
 }
 
-.buttonAddToCart {
+.addToCart {
   margin: -10px;
   transform: translateY(calc(-50%));
   width: 50%;
   align-self: center;
+  padding: 10px 17px;
 
   @include button(
     $color-text-primary,
@@ -43,4 +45,20 @@
     $color-button-border,
     $color-primary
   );
+}
+
+.favorite {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: $color-surface;
+
+  &.active svg {
+    fill: $color-primary;
+  }
 }
