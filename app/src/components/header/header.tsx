@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className={classes.header}>
-      <a href="/">
+      <a href="/pocket-cart/">
         <Logo />
       </a>
 

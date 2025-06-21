@@ -1,6 +1,8 @@
-# Pocket Cart
+# Pocket Cart - In progress
 
 A modern product list and cart application built with React, TypeScript, and SCSS.
+
+[Preview here](https://g-iele.github.io/pocket-cart/)
 
 ---
 
@@ -23,23 +25,6 @@ This project is inspired by the [Product List with Cart challenge on Frontend Me
 ---
 
 ## 🚀 Getting Started
-
-1. **Install dependencies:**
-
-   ```sh
-   yarn install
-   ```
-
-2. **Start the development server:**
-
-   ```sh
-   yarn dev
-   ```
-
-3. **Open your browser:**  
-   Visit [http://localhost:3000](http://localhost:3000) to view the app.
-
----
 
 ## 📝 Notes
 
