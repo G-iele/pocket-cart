@@ -5,14 +5,11 @@ import { useMediaQuery } from "react-responsive";
 import { Product } from "../context/products-context";
 
 export const CartProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [reservedProducts, setReservedProducts] = useState<ReservedProduct[]>(() => {
-    try {
-      const localData = localStorage.getItem("reservedProducts");
-      return localData ? JSON.parse(localData) : [];
-    } catch {
-      return [];
-    }
-  });
+  const localData = localStorage.getItem("reservedProducts");
+
+  const [reservedProducts, setReservedProducts] = useState<ReservedProduct[]>(
+    localData ? JSON.parse(localData) : [],
+  );
 
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 425 });
