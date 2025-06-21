@@ -1,15 +1,15 @@
 import { createContext } from "react";
 
 type FavoritesContextProps = {
-  favorites: string[];
-  toggleFavorite: (id: string) => void;
-  isFavorite: (id: string) => boolean;
+  favoriteIds: number[];
+  toggleFavorite: (id: number) => void;
+  isFavorite: (id: number) => boolean;
   showFavorites: boolean;
   setShowFavorites: (show: boolean) => void;
 };
 
 export const FavoritesContext = createContext<FavoritesContextProps>({
-  favorites: [],
+  favoriteIds: [],
   toggleFavorite: () => {
     throw new Error("No Favorite product context given");
   },

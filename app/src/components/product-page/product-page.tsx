@@ -6,13 +6,13 @@ import { useFavoritesContext } from "../../hooks/use-favorites-context.js";
 
 export const ProductPage: React.FC = () => {
   const { products, loading, error } = useProductContext();
-  const { showFavorites, favorites } = useFavoritesContext();
+  const { showFavorites, favoriteIds } = useFavoritesContext();
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error loading products: {error}</p>;
 
   const visibleProducts = showFavorites
-    ? products.filter((product) => favorites.includes(product.name))
+    ? products.filter((product) => favoriteIds.includes(product.id))
     : products;
 
   return (

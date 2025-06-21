@@ -11,7 +11,7 @@ import { useFavoritesContext } from "../../hooks/use-favorites-context";
 export const Header: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 425 });
   const { openCartModal } = useCartContext();
-  const { showFavorites, setShowFavorites } = useFavoritesContext();
+  const { setShowFavorites } = useFavoritesContext();
 
   return (
     <header className={classes.header}>

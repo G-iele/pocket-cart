@@ -2,27 +2,27 @@ import { useEffect, useState } from "react";
 import { FavoritesContext } from "../context/favorites-products-context";
 
 export const FavoritesProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    const stored = localStorage.getItem("favorites");
-    return stored ? JSON.parse(stored) : [];
+  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => {
+    const localData = localStorage.getItem("favorites");
+    return localData ? JSON.parse(localData) : [];
   });
 
   const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+    localStorage.setItem("favorites", JSON.stringify(favoriteIds));
+  }, [favoriteIds]);
 
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => (prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]));
+  const toggleFavorite = (id: number) => {
+    setFavoriteIds((prev) => (prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]));
   };
 
-  const isFavorite = (id: string) => favorites.includes(id);
+  const isFavorite = (id: number) => favoriteIds.includes(id);
 
   return (
     <FavoritesContext.Provider
       value={{
-        favorites,
+        favoriteIds,
         toggleFavorite,
         isFavorite,
         showFavorites,

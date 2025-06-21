@@ -15,16 +15,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { addItem } = useCartContext();
 
-  const { image, category, name, price } = product;
+  const { id, image, category, name, price } = product;
 
-  const favoriteProduct = isFavorite(name);
+  const favoriteProduct = isFavorite(id);
 
   return (
     <div className={classes.layout}>
       <img src={image} alt={name} />
       <button
         className={classes.favorite}
-        onClick={() => toggleFavorite(name)}
+        onClick={() => toggleFavorite(id)}
         aria-label="Toggle favorite"
       >
         <Icon icon={<HeartFilled />} size="md" color={favoriteProduct ? "active" : "default"} />
