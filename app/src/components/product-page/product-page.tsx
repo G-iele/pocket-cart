@@ -19,6 +19,7 @@ export const ProductPage: React.FC = () => {
     <main className={classes.pageLayout}>
       <section className={classes.sectionLayout}>
         <h1>Desserts</h1>
+        <h1>Test</h1>
         <div className={classes.cardsLayout}>
           {visibleProducts.map((product) => {
             return <ProductCard key={product.id} product={product} />;
