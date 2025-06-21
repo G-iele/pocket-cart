@@ -67,12 +67,7 @@ export const CartProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
       value={{ reservedProducts, addItem, removeItem, openCartModal, closeCartModal }}
     >
       {children}
-      <CartModal
-        isOpen={isOpen}
-        items={reservedProducts}
-        closeModal={closeCartModal}
-        removeItem={removeItem}
-      />
+      <CartModal isOpen={isOpen} closeModal={closeCartModal} />
     </CartContext.Provider>
   );
 };
