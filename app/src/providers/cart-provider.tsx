@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
-import { CartContext, CartItem } from "../context/cart-context";
+import { CartContext, ReservedProduct } from "../context/cart-context";
 import { CartModal } from "../components/cart-modal/cart-modal";
 import { useMediaQuery } from "react-responsive";
+import { Product } from "../context/products-context";
 
 export const CartProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [reservedProducts, setReservedProducts] = useState<ReservedProduct[]>(() => {
+    try {
+      const localData = localStorage.getItem("reservedProducts");
+      return localData ? JSON.parse(localData) : [];
+    } catch {
+      return [];
+    }
+  });
+
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 425 });
+
+  useEffect(() => {
+    localStorage.setItem("reservedProducts", JSON.stringify(reservedProducts));
+  }, [reservedProducts]);
 
   useEffect(() => {
     if (!isMobile && isOpen) {
@@ -14,32 +27,49 @@ export const CartProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     }
   }, [isMobile, isOpen]);
 
-  const addItem = (newItem: CartItem) => {
-    setItems((prevItems) => {
-      const existing = prevItems.find((item) => item.id === newItem.id);
+  const addItem = (product: Product) => {
+    setReservedProducts((prevItems: ReservedProduct[]) => {
+      const existing = prevItems.find((item) => item.id === product.id);
+
       if (existing) {
         return prevItems.map((item) =>
-          item.id === newItem.id ? { ...item, quantity: item.quantity + newItem.quantity } : item,
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                totalPrice: (item.quantity + 1) * item.unitPrice,
+              }
+            : item,
         );
       } else {
-        return [...prevItems, newItem];
+        const newReserved: ReservedProduct = {
+          id: product.id,
+          name: product.name,
+          quantity: 1,
+          unitPrice: product.price,
+          totalPrice: product.price,
+        };
+
+        return [...prevItems, newReserved];
       }
     });
   };
 
-  const removeItem = (id: CartItem["id"]) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const removeItem = (id: ReservedProduct["id"]) => {
+    setReservedProducts((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const openCartModal = () => setIsOpen(true);
   const closeCartModal = () => setIsOpen(false);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, openCartModal, closeCartModal }}>
+    <CartContext.Provider
+      value={{ reservedProducts, addItem, removeItem, openCartModal, closeCartModal }}
+    >
       {children}
       <CartModal
         isOpen={isOpen}
-        items={items}
+        items={reservedProducts}
         closeModal={closeCartModal}
         removeItem={removeItem}
       />

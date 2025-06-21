@@ -1,23 +1,24 @@
 import { createContext } from "react";
+import { Product } from "./products-context";
 
-export type CartItem = {
+export type ReservedProduct = {
   id: number;
-  title: string;
+  name: string;
   quantity: number;
   unitPrice: number;
   totalPrice: number;
 };
 
 export type CartContextProps = {
-  items: CartItem[];
-  addItem: (item: CartItem) => void;
+  reservedProducts: ReservedProduct[];
+  addItem: (item: Product) => void;
   removeItem: (id: number) => void;
   openCartModal: () => void;
   closeCartModal: () => void;
 };
 
 export const CartContext = createContext<CartContextProps>({
-  items: [],
+  reservedProducts: [],
   addItem: () => {
     throw new Error("No Cart context given");
   },

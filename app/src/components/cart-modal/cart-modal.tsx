@@ -1,16 +1,16 @@
-import { CartItem } from "../../context/cart-context";
 import { createPortal } from "react-dom";
 
 import classes from "./cart-modal.module.scss";
+import { Cart } from "../cart/cart";
+import { Icon } from "../icon/icon";
+import RemoveIcon from "./icon-remove-item.svg";
 
 type CartModalProps = {
   isOpen: boolean;
-  items: CartItem[] | null;
   closeModal: () => void;
-  removeItem: (id: CartItem["id"]) => void;
 };
 
-export const CartModal: React.FC<CartModalProps> = ({ isOpen, items, closeModal, removeItem }) => {
+export const CartModal: React.FC<CartModalProps> = ({ isOpen, closeModal }) => {
   if (!isOpen) return null;
 
   return createPortal(
@@ -21,24 +21,9 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, items, closeModal,
       className={classes.layout}
     >
       <button onClick={closeModal} aria-label="Close cart">
-        ✕
+        <Icon icon={<RemoveIcon />} size="sm" />
       </button>
-      <h2 id="cart-heading">Cart</h2>
-      {items ? (
-        items?.map((item) => (
-          <div key={item.id}>
-            <div>
-              <p>{item.title}</p>
-              <p>
-                {item.quantity} × ${item.unitPrice}
-              </p>
-            </div>
-            <button onClick={() => removeItem(item.id)}>✕</button>
-          </div>
-        ))
-      ) : (
-        <p>Your cart is empty</p>
-      )}
+      <Cart />
     </aside>,
     document.body,
   );

@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 25px;
   background-color: $color-surface;
+  padding: 25px;
 
   @media (min-width: $tablet) {
     align-self: start;

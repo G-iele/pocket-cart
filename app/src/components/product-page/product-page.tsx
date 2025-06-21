@@ -20,16 +20,8 @@ export const ProductPage: React.FC = () => {
       <section className={classes.sectionLayout}>
         <h1>Desserts</h1>
         <div className={classes.cardsLayout}>
-          {visibleProducts.map((product, i) => {
-            return (
-              <ProductCard
-                key={product.name + i}
-                img={product.image}
-                category={product.category}
-                name={product.name}
-                price={product.price}
-              />
-            );
+          {visibleProducts.map((product) => {
+            return <ProductCard key={product.id} product={product} />;
           })}
         </div>
       </section>

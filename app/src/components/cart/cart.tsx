@@ -1,21 +1,29 @@
-import { useMediaQuery } from "react-responsive";
-import { CartItem } from "../../context/cart-context";
 import classes from "./cart.module.scss";
 
 import EmptyCart from "./illustration-empty-cart.svg";
+import { useCartContext } from "../../hooks/use-cart-context";
+import { CartItem } from "../cart-item/cart-item";
 
 export const Cart = () => {
-  const isMobile = useMediaQuery({ maxWidth: 425 });
-
-  const className = isMobile ? `${classes.layout} ${classes.mobileHidden}` : classes.layout;
+  const { reservedProducts, removeItem } = useCartContext();
 
   return (
-    <div className={className}>
-      <h2>Your Cart (0)</h2>
-      <div className={classes.image}>
-        <EmptyCart />
-      </div>
-      <span className={classes.description}>Your added items will appear here</span>
+    <div className={classes.layout}>
+      <h2>
+        Your Cart ({reservedProducts.reduce((total, product) => total + product.quantity, 0)})
+      </h2>
+      {reservedProducts.length > 0 ? (
+        reservedProducts.map((product) => (
+          <CartItem key={product.id} reservedProduct={product} removeItem={removeItem} />
+        ))
+      ) : (
+        <>
+          <div className={classes.image}>
+            <EmptyCart />
+          </div>
+          <span className={classes.description}>Your added items will appear here</span>
+        </>
+      )}
     </div>
   );
 };
