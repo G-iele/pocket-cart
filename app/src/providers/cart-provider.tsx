@@ -56,12 +56,16 @@ export const CartProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     setReservedProducts((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const confirmOrder = () => {
+    setReservedProducts([]);
+  };
+
   const openCartModal = () => setIsOpen(true);
   const closeCartModal = () => setIsOpen(false);
 
   return (
     <CartContext.Provider
-      value={{ reservedProducts, addItem, removeItem, openCartModal, closeCartModal }}
+      value={{ reservedProducts, addItem, removeItem, confirmOrder, openCartModal, closeCartModal }}
     >
       {children}
       <CartModal isOpen={isOpen} closeModal={closeCartModal} />

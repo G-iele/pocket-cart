@@ -13,6 +13,7 @@ export type CartContextProps = {
   reservedProducts: ReservedProduct[];
   addItem: (item: Product) => void;
   removeItem: (id: number) => void;
+  confirmOrder: () => void;
   openCartModal: () => void;
   closeCartModal: () => void;
 };
@@ -23,6 +24,9 @@ export const CartContext = createContext<CartContextProps>({
     throw new Error("No Cart context given");
   },
   removeItem: () => {
+    throw new Error("No Cart context given");
+  },
+  confirmOrder: () => {
     throw new Error("No Cart context given");
   },
   openCartModal: () => {
